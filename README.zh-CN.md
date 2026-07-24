@@ -1,10 +1,10 @@
-# Avalonia.ScheduleEditor
+# ScheduleEditor
 
 [English](README.en-US.md) | **简体中文**
 
 一个面向普通用户的 Avalonia 定时任务编辑与进程内调度组件。用户可以通过图形界面设置重复规则，不需要理解 Cron；需要高级规则时，也可以选择开放自定义 Cron 输入。
 
-- NuGet 包：`Avalonia.ScheduleEditor`
+- NuGet 包：`ScheduleEditor`
 - 作者：`vincent, chatgpt`
 - GitHub：`https://github.com/hupo376787/ScheduleEditor`
 
@@ -59,7 +59,7 @@ JsonScheduleStore / SQLite / 宿主自定义存储
 ## 项目结构
 
 ```text
-src/AvaloniaScheduleEditor
+src/ScheduleEditor
   Controls/
     ScheduleEditor.axaml
     ScheduleEditor.axaml.cs
@@ -85,7 +85,7 @@ src/AvaloniaScheduleEditor
     ScheduleEditorViewModel.cs
     WeekDayItemViewModel.cs
 
-demo/AvaloniaScheduleEditor.Demo
+demo/ScheduleEditor.Demo
   完整调用示例、JSON 恢复、语言切换、外部日语语言包和执行日志
 ```
 
@@ -96,14 +96,14 @@ demo/AvaloniaScheduleEditor.Demo
 安装 .NET 10 SDK 后，在解决方案根目录执行：
 
 ```powershell
-dotnet restore .\AvaloniaScheduleEditor.sln
-dotnet run --project .\demo\AvaloniaScheduleEditor.Demo
+dotnet restore .\ScheduleEditor.sln
+dotnet run --project .\demo\ScheduleEditor.Demo
 ```
 
 也可以使用 Visual Studio 或 Rider 打开：
 
 ```text
-AvaloniaScheduleEditor.sln
+ScheduleEditor.sln
 ```
 
 ### 遇到 NuGet“访问被拒绝”
@@ -123,12 +123,12 @@ restore-local.cmd
 或手动执行：
 
 ```powershell
-dotnet restore .\AvaloniaScheduleEditor.sln `
+dotnet restore .\ScheduleEditor.sln `
   --packages .\.nuget\packages `
   --force `
   --no-cache
 
-dotnet build .\AvaloniaScheduleEditor.sln `
+dotnet build .\ScheduleEditor.sln `
   -c Debug `
   --no-restore
 ```
@@ -141,25 +141,25 @@ dotnet build .\AvaloniaScheduleEditor.sln `
 
 ```xml
 <ItemGroup>
-  <ProjectReference Include="..\AvaloniaScheduleEditor\AvaloniaScheduleEditor.csproj" />
+  <ProjectReference Include="..\ScheduleEditor\ScheduleEditor.csproj" />
 </ItemGroup>
 ```
 
 正式发布包可直接安装：
 
 ```powershell
-dotnet add package Avalonia.ScheduleEditor --version 1.0.0
+dotnet add package ScheduleEditor --version 1.0.0
 ```
 
 或在项目文件中加入：
 
 ```xml
 <ItemGroup>
-  <PackageReference Include="Avalonia.ScheduleEditor" Version="1.0.0" />
+  <PackageReference Include="ScheduleEditor" Version="1.0.0" />
 </ItemGroup>
 ```
 
-NuGet 包 ID 是 `Avalonia.ScheduleEditor`；代码命名空间仍为 `AvaloniaScheduleEditor`，因此现有 `using` 和 AXAML 命名空间不需要修改。
+NuGet 包 ID、程序集名和根命名空间现已统一为 `ScheduleEditor`。C# 使用 `ScheduleEditor.*` 命名空间，AXAML 使用 `using:ScheduleEditor.*`。
 
 ## 2. 在界面中放置控件
 
@@ -169,7 +169,7 @@ NuGet 包 ID 是 `Avalonia.ScheduleEditor`；代码命名空间仍为 `AvaloniaS
 <Window
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="using:AvaloniaScheduleEditor.Controls">
+    xmlns:controls="using:ScheduleEditor.Controls">
 
   <controls:ScheduleEditor
       DataContext="{Binding ScheduleEditor}" />
@@ -216,10 +216,10 @@ NuGet 包 ID 是 `Avalonia.ScheduleEditor`；代码命名空间仍为 `AvaloniaS
 ## 4. 创建存储、调度管理器和编辑器 ViewModel
 
 ```csharp
-using AvaloniaScheduleEditor.Localization;
-using AvaloniaScheduleEditor.Models;
-using AvaloniaScheduleEditor.Services;
-using AvaloniaScheduleEditor.ViewModels;
+using ScheduleEditor.Localization;
+using ScheduleEditor.Models;
+using ScheduleEditor.Services;
+using ScheduleEditor.ViewModels;
 
 public sealed class MainViewModel : IDisposable
 {
@@ -862,13 +862,13 @@ if (File.Exists(cultureSettingsPath))
 完整键列表位于：
 
 ```text
-src/AvaloniaScheduleEditor/Localization/ScheduleTextKeys.cs
+src/ScheduleEditor/Localization/ScheduleTextKeys.cs
 ```
 
 可直接复制的完整外部语言包示例位于：
 
 ```text
-demo/AvaloniaScheduleEditor.Demo/Languages/ja-JP.json
+demo/ScheduleEditor.Demo/Languages/ja-JP.json
 ```
 
 语言键分为：
@@ -1007,7 +1007,7 @@ this.AttachDeveloperTools();
 项目默认包信息为：
 
 ```text
-PackageId: Avalonia.ScheduleEditor
+PackageId: ScheduleEditor
 Version:   1.0.0
 ```
 
@@ -1020,8 +1020,8 @@ Version:   1.0.0
 生成文件：
 
 ```text
-artifacts/Avalonia.ScheduleEditor.1.0.0.nupkg
-artifacts/Avalonia.ScheduleEditor.1.0.0.snupkg
+artifacts/ScheduleEditor.1.0.0.nupkg
+artifacts/ScheduleEditor.1.0.0.snupkg
 ```
 
 发布前检查包内容：

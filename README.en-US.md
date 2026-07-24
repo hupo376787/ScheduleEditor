@@ -1,10 +1,10 @@
-# Avalonia.ScheduleEditor
+# ScheduleEditor
 
 **English** | [简体中文](README.zh-CN.md)
 
 A reusable Avalonia component for visually configuring and running scheduled tasks inside the host application process. Ordinary users can configure schedules through a graphical editor without learning Cron, while advanced applications may expose a custom Cron mode when needed.
 
-- NuGet package: `Avalonia.ScheduleEditor`
+- NuGet package: `ScheduleEditor`
 - Authors: `vincent, chatgpt`
 - GitHub: `https://github.com/hupo376787/ScheduleEditor`
 
@@ -59,7 +59,7 @@ The control does not choose a storage location by itself. The library provides `
 ## Project layout
 
 ```text
-src/AvaloniaScheduleEditor
+src/ScheduleEditor
   Controls/
     ScheduleEditor.axaml
     ScheduleEditor.axaml.cs
@@ -85,7 +85,7 @@ src/AvaloniaScheduleEditor
     ScheduleEditorViewModel.cs
     WeekDayItemViewModel.cs
 
-demo/AvaloniaScheduleEditor.Demo
+demo/ScheduleEditor.Demo
   Complete integration example, JSON restoration, language switching,
   an external Japanese language pack, and execution logs
 ```
@@ -97,14 +97,14 @@ demo/AvaloniaScheduleEditor.Demo
 After installing the .NET 10 SDK, run these commands from the solution root:
 
 ```powershell
-dotnet restore .\AvaloniaScheduleEditor.sln
-dotnet run --project .\demo\AvaloniaScheduleEditor.Demo
+dotnet restore .\ScheduleEditor.sln
+dotnet run --project .\demo\ScheduleEditor.Demo
 ```
 
 You can also open the following solution in Visual Studio or Rider:
 
 ```text
-AvaloniaScheduleEditor.sln
+ScheduleEditor.sln
 ```
 
 ### NuGet access-denied errors
@@ -124,12 +124,12 @@ restore-local.cmd
 Or run the commands manually:
 
 ```powershell
-dotnet restore .\AvaloniaScheduleEditor.sln `
+dotnet restore .\ScheduleEditor.sln `
   --packages .\.nuget\packages `
   --force `
   --no-cache
 
-dotnet build .\AvaloniaScheduleEditor.sln `
+dotnet build .\ScheduleEditor.sln `
   -c Debug `
   --no-restore
 ```
@@ -142,25 +142,25 @@ When the first error says that NuGet restore failed because access to a path was
 
 ```xml
 <ItemGroup>
-  <ProjectReference Include="..\AvaloniaScheduleEditor\AvaloniaScheduleEditor.csproj" />
+  <ProjectReference Include="..\ScheduleEditor\ScheduleEditor.csproj" />
 </ItemGroup>
 ```
 
 Install the stable NuGet package directly:
 
 ```powershell
-dotnet add package Avalonia.ScheduleEditor --version 1.0.0
+dotnet add package ScheduleEditor --version 1.0.0
 ```
 
 Or add this to the project file:
 
 ```xml
 <ItemGroup>
-  <PackageReference Include="Avalonia.ScheduleEditor" Version="1.0.0" />
+  <PackageReference Include="ScheduleEditor" Version="1.0.0" />
 </ItemGroup>
 ```
 
-The NuGet package ID is `Avalonia.ScheduleEditor`. The code namespace remains `AvaloniaScheduleEditor`, so existing `using` directives and AXAML namespace declarations do not change.
+The NuGet package ID, assembly name, and root namespace are all `ScheduleEditor`. Use `ScheduleEditor.*` in C# and `using:ScheduleEditor.*` in AXAML.
 
 ## 2. Add the editor to the UI
 
@@ -170,7 +170,7 @@ Daily, weekly, and monthly modes are visible by default:
 <Window
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="using:AvaloniaScheduleEditor.Controls">
+    xmlns:controls="using:ScheduleEditor.Controls">
 
   <controls:ScheduleEditor
       DataContext="{Binding ScheduleEditor}" />
@@ -217,10 +217,10 @@ If the currently selected mode becomes hidden, the editor automatically selects 
 ## 4. Create persistence, the manager, and the editor ViewModel
 
 ```csharp
-using AvaloniaScheduleEditor.Localization;
-using AvaloniaScheduleEditor.Models;
-using AvaloniaScheduleEditor.Services;
-using AvaloniaScheduleEditor.ViewModels;
+using ScheduleEditor.Localization;
+using ScheduleEditor.Models;
+using ScheduleEditor.Services;
+using ScheduleEditor.ViewModels;
 
 public sealed class MainViewModel : IDisposable
 {
@@ -864,13 +864,13 @@ An invalid customer placeholder does not crash the editor, but the untranslated 
 The complete key list is defined in:
 
 ```text
-src/AvaloniaScheduleEditor/Localization/ScheduleTextKeys.cs
+src/ScheduleEditor/Localization/ScheduleTextKeys.cs
 ```
 
 A complete external-pack example that can be copied is available at:
 
 ```text
-demo/AvaloniaScheduleEditor.Demo/Languages/ja-JP.json
+demo/ScheduleEditor.Demo/Languages/ja-JP.json
 ```
 
 Key groups cover:
@@ -1009,7 +1009,7 @@ The deprecated `Avalonia.Diagnostics` package has been removed.
 The default package metadata is:
 
 ```text
-PackageId: Avalonia.ScheduleEditor
+PackageId: ScheduleEditor
 Version:   1.0.0
 ```
 
@@ -1022,8 +1022,8 @@ Run this command from the solution root:
 Generated files:
 
 ```text
-artifacts/Avalonia.ScheduleEditor.1.0.0.nupkg
-artifacts/Avalonia.ScheduleEditor.1.0.0.snupkg
+artifacts/ScheduleEditor.1.0.0.nupkg
+artifacts/ScheduleEditor.1.0.0.snupkg
 ```
 
 Verify package contents before publishing:

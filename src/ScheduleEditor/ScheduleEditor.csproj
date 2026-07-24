@@ -1,0 +1,80 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <AssemblyName>ScheduleEditor</AssemblyName>
+    <RootNamespace>ScheduleEditor</RootNamespace>
+    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+
+    <IsPackable>true</IsPackable>
+    <PackageId>ScheduleEditor</PackageId>
+    <Version>1.0.0</Version>
+    <PackageVersion>$(Version)</PackageVersion>
+    <Title>Avalonia Schedule Editor</Title>
+    <Authors>vincent, chatgpt</Authors>
+    <Company>ScheduleEditor Contributors</Company>
+    <Copyright>Copyright © 2026 ScheduleEditor Contributors</Copyright>
+    <Description>A reusable Avalonia scheduling editor with interval, daily, weekly, monthly and Cron schedules, FluentScheduler integration, JSON persistence and customizable localization.</Description>
+    <PackageTags>avalonia;scheduler;schedule;cron;fluent-scheduler;localization;desktop;cross-platform</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageProjectUrl>https://github.com/hupo376787/ScheduleEditor</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/hupo376787/ScheduleEditor</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageReleaseNotes>Initial stable release with visual interval, daily, weekly, monthly and Cron scheduling; JSON persistence; built-in Chinese and English localization; and external JSON language packs.</PackageReleaseNotes>
+
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+    <Deterministic>true</Deterministic>
+    <DebugType>portable</DebugType>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <HotAvaloniaMode>Balanced</HotAvaloniaMode>
+    <HotAvaloniaHotkey>Alt+F5</HotAvaloniaHotkey>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="12.1.0" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
+    <PackageReference Include="FluentScheduler" Version="6.0.0" />
+    <PackageReference Include="NCrontab" Version="3.4.0" />
+  </ItemGroup>
+
+  <!-- Development-only Hot Reload dependencies. They are private and are not
+       included as transitive dependencies in a Release NuGet package. -->
+  <ItemGroup Condition="'$(Configuration)' == 'Debug'">
+    <PackageReference Include="Avalonia.Markup.Xaml.Loader"
+                      Version="12.1.0"
+                      PrivateAssets="All"
+                      Publish="True" />
+    <PackageReference Include="HotAvalonia"
+                      Version="3.1.4"
+                      PrivateAssets="All"
+                      Publish="True" />
+  </ItemGroup>
+
+  <!-- Files displayed or shipped with the NuGet package. -->
+  <ItemGroup>
+    <None Include="..\..\README.md"
+          Pack="true"
+          PackagePath="\" />
+    <None Include="..\..\README.zh-CN.md"
+          Pack="true"
+          PackagePath="\" />
+    <None Include="..\..\README.en-US.md"
+          Pack="true"
+          PackagePath="\" />
+    <None Include="..\..\CHANGELOG.md"
+          Pack="true"
+          PackagePath="\" />
+    <None Include="..\..\LICENSE"
+          Pack="true"
+          PackagePath="\" />
+    <None Include="..\..\docs\**\*"
+          Pack="true"
+          PackagePath="docs\%(RecursiveDir)%(Filename)%(Extension)" />
+  </ItemGroup>
+</Project>

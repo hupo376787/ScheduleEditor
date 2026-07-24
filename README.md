@@ -1,19 +1,21 @@
-# Avalonia.ScheduleEditor
+# ScheduleEditor
 
 [简体中文](README.zh-CN.md) | [English](README.en-US.md)
 
-`Avalonia.ScheduleEditor` is a reusable Avalonia component for visually configuring and running in-process scheduled tasks.
+`ScheduleEditor` is a reusable Avalonia component for visually configuring and running in-process scheduled tasks.
 
-`Avalonia.ScheduleEditor` 是一个用于可视化配置并在应用进程内执行定时任务的 Avalonia 组件。
+`ScheduleEditor` 是一个用于可视化配置并在应用进程内执行定时任务的 Avalonia 组件。
+
+![](000.jpg)
 
 ## Install / 安装
 
 ```bash
-dotnet add package Avalonia.ScheduleEditor --version 1.0.0
+dotnet add package ScheduleEditor --version 1.0.0
 ```
 
 ```xml
-<PackageReference Include="Avalonia.ScheduleEditor" Version="1.0.0" />
+<PackageReference Include="ScheduleEditor" Version="1.0.0" />
 ```
 
 ## Highlights / 主要功能
@@ -32,6 +34,6 @@ For installation, application-A integration, external language-pack loading, loc
 
 ## Package metadata
 
-- Package ID: `Avalonia.ScheduleEditor`
+- Package ID: `ScheduleEditor`
 - Authors: `vincent, chatgpt`
 - Repository: `https://github.com/hupo376787/ScheduleEditor`
