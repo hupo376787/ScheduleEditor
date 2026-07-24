@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <HotAvaloniaMode>Balanced</HotAvaloniaMode>
+    <HotAvaloniaHotkey>Alt+F5</HotAvaloniaHotkey>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia.Desktop" Version="12.1.0" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="12.1.0" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(Configuration)' == 'Debug'">
+    <PackageReference Include="AvaloniaUI.DiagnosticsSupport"
+                      Version="2.2.3" />
+    <PackageReference Include="Avalonia.Markup.Xaml.Loader"
+                      Version="12.1.0"
+                      PrivateAssets="All"
+                      Publish="True" />
+    <PackageReference Include="HotAvalonia"
+                      Version="3.1.4"
+                      PrivateAssets="All"
+                      Publish="True" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\AvaloniaScheduleEditor\AvaloniaScheduleEditor.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Languages\*.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>

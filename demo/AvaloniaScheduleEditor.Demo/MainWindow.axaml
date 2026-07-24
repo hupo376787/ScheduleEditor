@@ -1,0 +1,179 @@
+<Window
+    x:Class="AvaloniaScheduleEditor.Demo.MainWindow"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:AvaloniaScheduleEditor.Controls"
+    xmlns:localization="using:AvaloniaScheduleEditor.Localization"
+    xmlns:vm="using:AvaloniaScheduleEditor.Demo.ViewModels"
+    x:DataType="vm:MainWindowViewModel"
+    Width="1160"
+    Height="760"
+    MinWidth="940"
+    MinHeight="650"
+    Title="Avalonia 定时任务组件 Demo">
+
+  <Grid RowDefinitions="Auto,*" Margin="28" RowSpacing="20">
+    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="24">
+      <StackPanel Spacing="6">
+        <TextBlock
+            FontSize="26"
+            FontWeight="Bold"
+            Text="Avalonia 定时任务组件" />
+        <TextBlock
+            Opacity="0.62"
+            Text=".NET 10 + Avalonia + FluentScheduler，支持 JSON 持久化、多语言和 XAML Hot Reload。" />
+      </StackPanel>
+
+      <StackPanel
+          Grid.Column="1"
+          HorizontalAlignment="Right"
+          Spacing="8">
+        <StackPanel
+            HorizontalAlignment="Right"
+            Orientation="Horizontal"
+            Spacing="8">
+          <TextBlock
+              VerticalAlignment="Center"
+              Opacity="0.62"
+              Text="组件语言" />
+          <ComboBox
+              Width="160"
+              ItemsSource="{Binding Languages}"
+              SelectedItem="{Binding SelectedLanguage, Mode=TwoWay}">
+            <ComboBox.ItemTemplate>
+              <DataTemplate x:DataType="localization:ScheduleLanguageInfo">
+                <TextBlock Text="{Binding DisplayName}" />
+              </DataTemplate>
+            </ComboBox.ItemTemplate>
+          </ComboBox>
+          <Button
+              Command="{Binding LoadSampleLanguageCommand}"
+              Content="加载日语 JSON 示例" />
+        </StackPanel>
+
+        <StackPanel
+            HorizontalAlignment="Right"
+            Orientation="Horizontal"
+            Spacing="8">
+          <TextBlock
+              VerticalAlignment="Center"
+              Opacity="0.62"
+              Text="当前时间" />
+          <TextBlock
+              VerticalAlignment="Center"
+              FontSize="16"
+              FontWeight="SemiBold"
+              Text="{Binding CurrentTimeText}" />
+        </StackPanel>
+      </StackPanel>
+    </Grid>
+
+    <Grid
+        Grid.Row="1"
+        ColumnDefinitions="3*,2*"
+        ColumnSpacing="22">
+
+      <StackPanel Spacing="14">
+        <controls:ScheduleEditor
+            DataContext="{Binding Editor}"
+            ShowCron="True"
+            ShowEveryHours="True"
+            ShowEveryMinutes="True"
+            ShowEverySeconds="True" />
+
+        <StackPanel
+            HorizontalAlignment="Right"
+            Orientation="Horizontal"
+            Spacing="10">
+          <Button
+              Command="{Binding SetNextMinuteCommand}"
+              Content="设为下一分钟" />
+          <Button
+              Command="{Binding RunNowCommand}"
+              Content="立即执行测试" />
+        </StackPanel>
+      </StackPanel>
+
+      <Border
+          Grid.Column="1"
+          Padding="20"
+          BorderBrush="#26000000"
+          BorderThickness="1"
+          CornerRadius="12">
+        <Grid RowDefinitions="Auto,Auto,1,Auto,*" RowSpacing="14">
+          <TextBlock
+              FontSize="19"
+              FontWeight="Bold"
+              Text="运行状态" />
+
+          <Grid
+              Grid.Row="1"
+              ColumnDefinitions="Auto,*"
+              ColumnSpacing="14"
+              RowDefinitions="Auto,Auto,Auto">
+            <TextBlock Text="调度器：" />
+            <TextBlock
+                Grid.Column="1"
+                FontWeight="SemiBold"
+                Text="{Binding SchedulerStatusText}" />
+
+            <TextBlock
+                Grid.Row="1"
+                Text="下次执行：" />
+            <TextBlock
+                Grid.Row="1"
+                Grid.Column="1"
+                FontWeight="SemiBold"
+                Text="{Binding RuntimeNextRunText}"
+                TextWrapping="Wrap" />
+
+            <TextBlock
+                Grid.Row="2"
+                Text="上次执行：" />
+            <TextBlock
+                Grid.Row="2"
+                Grid.Column="1"
+                Text="{Binding LastRunText}" />
+          </Grid>
+
+          <Border
+              Grid.Row="2"
+              Background="#22000000"
+              Height="1" />
+
+          <Grid Grid.Row="3" ColumnDefinitions="*,Auto">
+            <StackPanel Spacing="3">
+              <TextBlock
+                  FontWeight="SemiBold"
+                  Text="执行日志" />
+              <TextBlock
+                  FontSize="11"
+                  Opacity="0.58"
+                  Text="{Binding SettingsFilePath}"
+                  TextTrimming="CharacterEllipsis" />
+            </StackPanel>
+
+            <Button
+                Grid.Column="1"
+                Command="{Binding ClearLogsCommand}"
+                Content="清空" />
+          </Grid>
+
+          <ListBox
+              Grid.Row="4"
+              ItemsSource="{Binding Logs}">
+            <ListBox.ItemTemplate>
+              <DataTemplate x:CompileBindings="False">
+                <TextBlock
+                    FontFamily="Consolas,Menlo,monospace"
+                    FontSize="12"
+                    Text="{Binding}"
+                    TextWrapping="Wrap" />
+              </DataTemplate>
+            </ListBox.ItemTemplate>
+          </ListBox>
+        </Grid>
+      </Border>
+    </Grid>
+  </Grid>
+</Window>

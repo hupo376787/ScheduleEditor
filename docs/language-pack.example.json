@@ -1,0 +1,16 @@
+{
+  "culture": "de-DE",
+  "displayName": "Deutsch",
+  "fallbackCulture": "en-US",
+  "strings": {
+    "Title": "Automatische Ausführung",
+    "Description": "Aufgaben werden ausgeführt, solange die Anwendung läuft.",
+    "Enabled": "Aktiviert",
+    "Disabled": "Deaktiviert",
+    "Daily": "Täglich",
+    "Weekly": "Wöchentlich",
+    "Monthly": "Monatlich",
+    "Save": "Speichern",
+    "Cancel": "Abbrechen"
+  }
+}
