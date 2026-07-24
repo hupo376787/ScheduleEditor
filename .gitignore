@@ -1,3 +1,21 @@
+# Build output
+bin/
+obj/
+artifacts/
 
 # Solution-local NuGet package cache
 .nuget/
+
+# IDE files
+.vs/
+.idea/
+*.user
+*.suo
+
+# NuGet packages and symbols
+*.nupkg
+*.snupkg
+
+# Local publishing secrets/settings
+*.apikey
+nuget-api-key.txt

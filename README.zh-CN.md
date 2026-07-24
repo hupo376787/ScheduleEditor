@@ -1,8 +1,12 @@
-# AvaloniaScheduleEditor
+# Avalonia.ScheduleEditor
 
 [English](README.en-US.md) | **简体中文**
 
 一个面向普通用户的 Avalonia 定时任务编辑与进程内调度组件。用户可以通过图形界面设置重复规则，不需要理解 Cron；需要高级规则时，也可以选择开放自定义 Cron 输入。
+
+- NuGet 包：`Avalonia.ScheduleEditor`
+- 作者：`vincent, chatgpt`
+- GitHub：`https://github.com/hupo376787/ScheduleEditor`
 
 ## 功能
 
@@ -141,7 +145,21 @@ dotnet build .\AvaloniaScheduleEditor.sln `
 </ItemGroup>
 ```
 
-如果之后将组件打包为 NuGet，则改为对应的 `PackageReference`。
+正式发布包可直接安装：
+
+```powershell
+dotnet add package Avalonia.ScheduleEditor --version 1.0.0
+```
+
+或在项目文件中加入：
+
+```xml
+<ItemGroup>
+  <PackageReference Include="Avalonia.ScheduleEditor" Version="1.0.0" />
+</ItemGroup>
+```
+
+NuGet 包 ID 是 `Avalonia.ScheduleEditor`；代码命名空间仍为 `AvaloniaScheduleEditor`，因此现有 `using` 和 AXAML 命名空间不需要修改。
 
 ## 2. 在界面中放置控件
 
@@ -983,3 +1001,41 @@ this.AttachDeveloperTools();
 - 不要在调度任务中直接阻塞 Avalonia UI 线程；需要更新界面时使用 `Dispatcher.UIThread.Post`。
 - 外部语言包和当前 culture 不会由 `JsonScheduleStore` 保存；宿主应在每次启动时重新注册语言包，并按需单独保存用户语言选择。
 - `ScheduleEditorViewModel` 实现了 `IDisposable`，窗口或宿主 ViewModel 释放时应调用 `Dispose()` 以取消语言事件订阅。
+
+# NuGet 打包与发布
+
+项目默认包信息为：
+
+```text
+PackageId: Avalonia.ScheduleEditor
+Version:   1.0.0
+```
+
+在解决方案根目录执行：
+
+```powershell
+.\pack-release.ps1
+```
+
+生成文件：
+
+```text
+artifacts/Avalonia.ScheduleEditor.1.0.0.nupkg
+artifacts/Avalonia.ScheduleEditor.1.0.0.snupkg
+```
+
+发布前检查包内容：
+
+```powershell
+.\verify-nupkg.ps1
+```
+
+设置 NuGet.org API Key 并发布：
+
+```powershell
+$env:NUGET_API_KEY = "你的 API Key"
+.\push-nuget.ps1
+Remove-Item Env:NUGET_API_KEY
+```
+
+NuGet.org 不允许覆盖已经发布的同一版本。`1.0.0` 发布后，如需修复，请改为 `1.0.1`。

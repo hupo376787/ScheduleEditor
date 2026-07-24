@@ -1,8 +1,12 @@
-# AvaloniaScheduleEditor
+# Avalonia.ScheduleEditor
 
 **English** | [简体中文](README.zh-CN.md)
 
 A reusable Avalonia component for visually configuring and running scheduled tasks inside the host application process. Ordinary users can configure schedules through a graphical editor without learning Cron, while advanced applications may expose a custom Cron mode when needed.
+
+- NuGet package: `Avalonia.ScheduleEditor`
+- Authors: `vincent, chatgpt`
+- GitHub: `https://github.com/hupo376787/ScheduleEditor`
 
 ## Features
 
@@ -142,7 +146,21 @@ When the first error says that NuGet restore failed because access to a path was
 </ItemGroup>
 ```
 
-After publishing the component as a NuGet package, replace this with the corresponding `PackageReference`.
+Install the stable NuGet package directly:
+
+```powershell
+dotnet add package Avalonia.ScheduleEditor --version 1.0.0
+```
+
+Or add this to the project file:
+
+```xml
+<ItemGroup>
+  <PackageReference Include="Avalonia.ScheduleEditor" Version="1.0.0" />
+</ItemGroup>
+```
+
+The NuGet package ID is `Avalonia.ScheduleEditor`. The code namespace remains `AvaloniaScheduleEditor`, so existing `using` directives and AXAML namespace declarations do not change.
 
 ## 2. Add the editor to the UI
 
@@ -985,3 +1003,41 @@ The deprecated `Avalonia.Diagnostics` package has been removed.
 - Do not block the Avalonia UI thread from a scheduled job. Use `Dispatcher.UIThread.Post` when UI updates are required.
 - External language packs and the current culture are not persisted by `JsonScheduleStore`; register packs on every startup and persist the selected culture separately when needed.
 - `ScheduleEditorViewModel` implements `IDisposable`; dispose it with the window or host ViewModel to unsubscribe localization events.
+
+# Packing and publishing to NuGet
+
+The default package metadata is:
+
+```text
+PackageId: Avalonia.ScheduleEditor
+Version:   1.0.0
+```
+
+Run this command from the solution root:
+
+```powershell
+.\pack-release.ps1
+```
+
+Generated files:
+
+```text
+artifacts/Avalonia.ScheduleEditor.1.0.0.nupkg
+artifacts/Avalonia.ScheduleEditor.1.0.0.snupkg
+```
+
+Verify package contents before publishing:
+
+```powershell
+.\verify-nupkg.ps1
+```
+
+Set the NuGet.org API key and publish:
+
+```powershell
+$env:NUGET_API_KEY = "your API key"
+.\push-nuget.ps1
+Remove-Item Env:NUGET_API_KEY
+```
+
+NuGet.org does not allow an existing package version to be overwritten. After publishing `1.0.0`, use `1.0.1` for a bug-fix release.
